@@ -3,7 +3,7 @@ import sys
 from game_object import GameObject, Player
 
 class GameManager(object):
-    def __init__(self, size=(1280, 720), fullscreen=True):
+    def __init__(self, size=(1280, 720), fullscreen=False):
         pygame.init()
         self.size = size
         if fullscreen:
