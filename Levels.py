@@ -13,7 +13,7 @@ class Levels():
 
     background = None
 
-    def __init__(self, size = (800,600)):
+    def __init__(self, size):
         self.size = size
 
     def draw(self, screen):

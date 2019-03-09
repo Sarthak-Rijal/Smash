@@ -1,6 +1,7 @@
 import pygame
 import sys
 from game_object import GameObject, Player
+from Levels import *
 
 class GameManager(object):
     def __init__(self, size=(1280, 720), fullscreen=False):
@@ -26,14 +27,14 @@ class GameManager(object):
         self.player_two = Player(player_two_position, player_two_dimensions, self.size, player_two_controls)
         self.players.add(self.player_one)
         self.players.add(self.player_two)
+        self.levels = {'Level_01': Level_01(size)}
         self.platform = GameObject(platform_position, platform_dimensions, self.size)
         self.platform_group.add(self.platform)
         self.FPS = 60
 
-    def start_game_loop(self, level):
+    def start_game_loop(self):
         while True:
             self.loop()
-            level.draw(self.screen)
 
     def loop(self):
         # REAL GAME CODE
@@ -59,7 +60,7 @@ class GameManager(object):
             self.player_two.falling = True
         self.players.update()
         self.platform_group.update()
-        #self.screen.fill((0, 23, 0))
+        self.levels['Level_01'].draw(self.screen)
         self.players.draw(self.screen)
         self.platform_group.draw(self.screen)
         pygame.display.update()
