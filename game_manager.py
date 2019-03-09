@@ -3,7 +3,7 @@ import sys
 from game_object import GameObject, Player
 
 class GameManager(object):
-    def __init__(self, size=(1280, 720), fullscreen=False):
+    def __init__(self, size=(1280, 720), fullscreen=True):
         pygame.init()
         self.size = size
         if fullscreen:
@@ -14,10 +14,10 @@ class GameManager(object):
         # Initialize players
         self.players = pygame.sprite.Group()
         self.platform_group = pygame.sprite.Group()
-        platform_dimensions = (500, 50)
+        platform_dimensions = (400, 50)
         platform_position = (500-int(platform_dimensions[0]/2), 600)
         player_one_dimensions = (100, 150)
-        player_two_dimensions = (150, 200)
+        player_two_dimensions = (100, 200)
         player_one_position = (platform_position[0], platform_position[1] - int(player_one_dimensions[1]))
         player_two_position = (platform_position[0] + platform_dimensions[0] - player_two_dimensions[0], platform_position[1] - int(player_two_dimensions[1]))
         player_one_controls = {'left': pygame.K_LEFT, 'right': pygame.K_RIGHT}
@@ -37,7 +37,7 @@ class GameManager(object):
     def loop(self):
         # REAL GAME CODE
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 sys.exit(0)
         # Draw / render
         if self.player_one.did_collide(self.platform):
