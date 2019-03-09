@@ -7,7 +7,7 @@ import math
 pygame.init()
 
 #arbritary screen size and setup 
-size = (225, 136)
+size = (800, 600)
 screen = pygame.display.set_mode(size)
 
 
@@ -21,7 +21,10 @@ def play():
 
  
     while True:
-
+        
+        screen.fill((255,255,255))
+        #rect(Surface, color, Rect, width=0)
+        pygame.draw.rect(screen, (0,0,0), [50,50,50,50])
        #gets the mouse position
         x,y = pygame.mouse.get_pos()
 
