@@ -17,8 +17,8 @@ class GameObject(pygame.sprite.Sprite):
         self.rect.y = normalize(position[1], size[1])
 
     def move(self, dx, dy):
-        self.rect.x += dx
-        self.rect.y += dy
+        self.rect.x += normalize(dx, self.size[0])
+        self.rect.y += normalize(dy, self.size[1])
 
     def did_collide(self, sprite):
         return self.rect.colliderect(sprite.rect)
