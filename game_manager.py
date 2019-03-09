@@ -18,14 +18,14 @@ class GameManager(object):
         platform_position = (500-int(platform_dimensions[0]/2), 600)
         player_one_dimensions = (100, 150)
         player_two_dimensions = (150, 200)
-        player_one_position = (platform_position[0] , platform_position[1] - int(player_one_dimensions[1]))
-        player_two_position = (platform_position[0] + platform_dimensions[0] - player_two_dimensions[0], platform_position[1] - int(player_two_dimensions[1]))
-        player_one = Player(player_one_position, player_one_dimensions, self.size, {'left': pygame.K_LEFT, 'right': pygame.K_RIGHT})
-        player_two = Player(player_two_position, player_two_dimensions, self.size, {'left': pygame.K_j, 'right': pygame.K_k})
-        self.players.add(player_one)
-        self.players.add(player_two)
-        platform = GameObject(platform_position, platform_dimensions, self.size)
-        self.platform_group.add(platform)
+        player_one_position = (platform_position[0], platform_position[1] - int(player_one_dimensions[1])+1)
+        player_two_position = (platform_position[0] + platform_dimensions[0] - player_two_dimensions[0], platform_position[1] - int(player_two_dimensions[1])+1)
+        self.player_one = Player(player_one_position, player_one_dimensions, self.size, {'left': pygame.K_LEFT, 'right': pygame.K_RIGHT})
+        self.player_two = Player(player_two_position, player_two_dimensions, self.size, {'left': pygame.K_j, 'right': pygame.K_k})
+        self.players.add(self.player_one)
+        self.players.add(self.player_two)
+        self.platform = GameObject(platform_position, platform_dimensions, self.size)
+        self.platform_group.add(self.platform)
         self.FPS = 60
 
     def start_game_loop(self):
@@ -43,6 +43,9 @@ class GameManager(object):
         self.screen.fill((0, 0, 0))
         self.players.draw(self.screen)
         self.platform_group.draw(self.screen)
-
+        if not self.player_one.did_collide(self.platform):
+            self.player_one.falling = True
+        if not self.player_two.did_collide(self.platform):
+            self.player_two.falling = True
         pygame.display.update()
         self.clock.tick(self.FPS)

@@ -20,15 +20,21 @@ class GameObject(pygame.sprite.Sprite):
         self.rect.x += dx
         self.rect.y += dy
 
+    def did_collide(self, sprite):
+        return self.rect.colliderect(sprite.rect)
+
 
 class Player(GameObject):
     def __init__(self, position, dimensions, size, controls):
         GameObject.__init__(self, position, dimensions, size)
         self.controls = controls
+        self.falling = False
 
     def update(self):
         pressed_key = pygame.key.get_pressed()
         if pressed_key[self.controls['left']]:
-            self.move(-20, 0)
+            self.move(-10, 0)
         if pressed_key[self.controls['right']]:
-            self.move(20, 0)
+            self.move(10, 0)
+        if self.falling:
+            self.move(0, 20)
