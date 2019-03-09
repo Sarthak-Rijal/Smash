@@ -14,6 +14,7 @@ class character(game_object):
     def move(self, speed, screen):
         keys = pygame.key.get_pressed()
         
+        
         if keys[self.config[self.player]['left']]:
             self.x -= speed 
         if keys[self.config[self.player]['right']]:
