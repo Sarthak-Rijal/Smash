@@ -13,13 +13,13 @@ class GameManager(object):
         self.clock = pygame.time.Clock()
         self.FPS = 60
 
-    def start_game_loop(self):
+    def start_game_loop(self, level):
         while True:
             self.loop()
+            level.draw(self.screen)
 
     def loop(self):
         x,y = pygame.mouse.get_pos()
-        print(view_width(1000, self.size[0]))
         # event listener
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -29,8 +29,10 @@ class GameManager(object):
             #toggles full screen
             if event.type == pygame.KEYDOWN and event.key == pygame.K_f:
                 if self.screen.get_flags() & pygame.FULLSCREEN:
+                    #broken will fuck shit up, dont try
                     pygame.display.set_mode(size)
                 else:
+                    #broken will fuck shit up, dont try
                     pygame.display.set_mode(size, pygame.FULLSCREEN)
     
 
