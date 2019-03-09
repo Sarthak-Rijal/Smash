@@ -1,5 +1,6 @@
 import pygame
 
+
 class Levels():
     """Generic class used to define a level"""
 
@@ -12,8 +13,8 @@ class Levels():
 
     background = None
 
-    def __init__(self):
-        pass
+    def __init__(self, size = (800,600)):
+        self.size = size
 
     def draw(self, screen):
         """ Draw everything on this level. """
@@ -27,8 +28,8 @@ class Levels():
         
 class Level_01(Levels):
 
-    def __init__(self):
+    def __init__(self, size = (800,600)):
 
         #Create Level 1
-        Levels.__init__(self)    
-        self.background = pygame.image.load("background.png")
+        Levels.__init__(self, size)    
+        self.background = pygame.transform.scale(pygame.image.load("background.png"),self.size) 
