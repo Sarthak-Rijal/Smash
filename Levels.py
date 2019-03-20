@@ -28,7 +28,7 @@ class Levels():
         
 class Level_01(Levels):
 
-    def __init__(self, size = (800,600)):
+    def __init__(self, size):
 
         #Create Level 1
         Levels.__init__(self, size)    

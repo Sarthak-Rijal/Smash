@@ -1,16 +1,40 @@
 import pygame
-from game_object import game_object
+from pygame_functions import *
+from Sprite import *
+from constants import *
+from GameObject import *
 
-class character(game_object):
+imamePos = "PlayerImages/dummyCharacter/"
+class character(GameObject):
     
-    def __init__(self, x, y, width, height, player):
-        super().__init__(x,y,width,height)
-        self.player = player
+    def __init__(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height        
         self.config = {'one': {'left': pygame.K_LEFT, 'right': pygame.K_RIGHT}, 'two': {'left':pygame.K_a, 'right':pygame.K_d }}
 
-    def update(self, screen):
-        pygame.draw.rect(screen, (0,0,0), [self.x,self.y,self.width,self.height])
+        #frames of walk left
+        self.walking_frames_l = []
+        self.walking_frames_r = []
+        self.stand_frame = []
 
+        self.direction = "R"
+
+        #loads the standing image
+        image = pygame.image.load(imamePos+"standing/standing.png")
+        actualImage = pygame.transform.scale(image,character1_size)
+        self.stand_frame.append(actualImage)
+
+        #loads running sitting images
+        for i in range(8): 
+            image = pygame.image.load(imamePos+"/running/"+str(i)+".png")
+            actualImage = pygame.transform.scale(image, character1_size)
+            self.walking_frames_r.append(actualImage)        
+    
+    def update(self, i, screen):
+        screen.blit(self.walking_frames_r[i], (self.x,self.y)) 
+            
     def move(self, speed, screen):
         keys = pygame.key.get_pressed()
         
