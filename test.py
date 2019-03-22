@@ -18,18 +18,15 @@ COL = 50#columns
 
 #GLOBAL CELL ATTRIBUTES
 
-
-
+#global reference to time
 
 
 def play():
 
-    nextFrame = pygame.time.get_ticks()
-    frame = 0
+    char1= pygame.time.get_ticks()
+    char1_Frame = 0
     while True:
-        if pygame.time.get_ticks() > nextFrame:
-            frame = (frame+1)%8
-            nextFrame += 10
+        
 
         screen.fill((255,255,255))
 
@@ -39,9 +36,8 @@ def play():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            
         player = character(50,50,100,100)
-        player.update(frame, screen)
+        char1_Frame, char1 = player.update(char1, char1_Frame, 8, 80, screen)
         #drawing = Sprite("player.png")
         #screen.blit(drawing.getImage(5,0,35,50), (50,50))
         pygame.display.update()

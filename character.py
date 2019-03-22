@@ -32,8 +32,13 @@ class character(GameObject):
             actualImage = pygame.transform.scale(image, character1_size)
             self.walking_frames_r.append(actualImage)        
     
-    def update(self, i, screen):
-        screen.blit(self.walking_frames_r[i], (self.x,self.y)) 
+    def update(self,nextFrame, frame, noSprites, speed, screen):
+        if pygame.time.get_ticks() > nextFrame:
+            frame = (frame+1)%noSprites
+            nextFrame += speed
+        screen.blit(self.walking_frames_r[frame], (self.x,self.y)) 
+        print(frame, nextFrame)
+        return frame, nextFrame
             
     def move(self, speed, screen):
         keys = pygame.key.get_pressed()
