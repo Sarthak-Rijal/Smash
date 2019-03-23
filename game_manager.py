@@ -14,7 +14,7 @@ class GameManager(object):
             self.screen = pygame.display.set_mode(size)
         self.clock = pygame.time.Clock()
         # Initialize players
-        self.player_one = character(50,50,300,500)
+        self.player_one = character(50,50,300,500, "one")
         #----------------------------------
         #self.players = pygame.sprite.Group()
         self.platform_group = pygame.sprite.Group()
@@ -70,8 +70,7 @@ class GameManager(object):
         self.levels['Level_01'].draw(self.screen)
 
         #self.players.update()
-        self.player_one.update(self.screen)
-        
+        self.player_one.move(8, 80, 10, self.screen)       
         self.platform_group.update()
       
         #self.players.draw(self.screen)
